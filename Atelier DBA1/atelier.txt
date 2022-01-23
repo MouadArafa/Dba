@@ -1,0 +1,7 @@
+atelier chp 09 cours
+
+desc v$parameter ;
+select NAME,VALUE from v$parameter WHERE upper(NAME) ='DB_BLOCK_SIZE' ;
+select NAME,VALUE from v$parameter WHERE upper(NAME) ='DB_CACHE_SIZE' ; /*COURS CH 9 */
+
+ 

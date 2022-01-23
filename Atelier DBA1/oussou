@@ -1,0 +1,48 @@
+<div class="container">
+    <h1>Exemple 2</h1>
+    <b>Utilisation de ngIf et ngFor</b>
+    <p *ngIf="afficher"> Afficher seulement si afficher = true</p>
+    <p *ngIf="utilisateur"> {{utilisateur.nom}}</p>
+    <p *ngIf="!afficher"> Afficher seulement si "afficher" est false</p><br>
+    <b>ngIf - exmple avec and et or</b>
+    <p *ngIf="a && b"> afficher seulement si a et b sont true</p><br>
+    <b>ngIf - Utilisation de OR || </b>
+    <p *ngIf="a || b"> Afficher seulement a ou b est true</p><br>
+    <b>ngIf - Utilisation de else dans ngIf</b>
+<div *ngIf="afficher; else notafficher">
+    <P> afficher seulement si afficher est true</P>
+</div>
+<ng-template #notafficher>
+    <p> Afficher seulement si afficher est false</p>
+</ng-template>
+<b>ngIf with "then" example</b>
+<ng-template *ngIf="afficher; then afficherBlock; else notafficherBlock">
+</ng-template>
+<ng-template #afficherBlock>
+    <p> Afficher this only if "afficher" is true</p>
+</ng-template>
+<ng-template #notafficherBlock>
+    <p> Afficher si "afficher" est false</p>
+</ng-template>
+<b> Utilisation de ngIf et ngfor dans la balise table</b>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Prenom</th><th>Nom</th><th>Email</th>
+            <th *ngIf="afficherActions">Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let utilisateur of utilisateurs ">
+            <td>{{ utilisateur.prenom | titlecase }}</td><td>{{ utilisateur.nom | uppercase }}</td>
+            <td>{{ utilisateur.email }}</td><td *ngIf="afficherActions">
+                <button>Supprimer</button>
+                <button>Modifier</button>
+            </td>
+        </tr>
+    </tbody>
+</table>
+</div>
+
+
+<p>ds works!</p>

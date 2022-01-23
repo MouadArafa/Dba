@@ -1,0 +1,10 @@
+create or replace Type T_ADRESSAGE as object 
+(IP varchar2(15) ,DNS VARCHAR2(100)) ;
+create or replace Type T_localisation  as object 
+(campus varchar2 (50) , BATIMENT  VARCHAR2(20), salle number(3)) ;
+
+create table Serveur ( Numserv number(3), Adressage T_ADRESSAGE ,
+Localisation T_localisation );
+insert into serveur values (4,T_ADRESSAGE('159.84.143.204',www.dns1.com'),
+('C1,'B1',1)) ;
+ 

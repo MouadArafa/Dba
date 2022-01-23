@@ -1,0 +1,52 @@
+CREATE OR REPLACE TYPE T_ADRESSAGE  AS OBJECT
+(IP varchar2(15) ,DNS VARCHAR2(100)) ;
+create or replace Type T_LOCALISATION  as object
+(campus varchar2(50) ,BATIMENT VARCHAR2(20),salle number(3)) ;
+
+create table Serveur (Numserv number(3),Adressage T_ADRESSAGE ,
+Localisation  T_localisation ) ; 
+
+insert into serveur values (0,T_ADRESSAGE('159.84.143.204','www.dns1.com'),
+T_localisation('C1','B1',1));
+
+insert into serveur values (1,T_ADRESSAGE('159.84.143.120','www.dns2.com'),
+T_localisation('C2','B2',2));
+
+insert into serveur values (2,T_ADRESSAGE('159.84.143.249','www.dns3.com'),
+T_localisation('C2','B2',3));
+
+insert into serveur values (3,T_ADRESSAGE('159.84.143.252','www.dns4.com'),
+T_localisation('C2','B2',2));
+
+insert into serveur values (4,T_ADRESSAGE('159.84.143.251','www.dns5.com'),
+T_localisation('C2','B2',2));
+
+insert into serveur values (5,T_ADRESSAGE('159.84.143.250','www.dns6.com'),
+T_localisation('C2','B2',4));
+
+commit ; 
+
+-- question 4 select * from serveur ; 
+select s.adressage.dns, s.localisation.campus from serveur s ;
+select s.adressage.ip,s.adressage.dns, s.localisation.campus from serveur s where s.localisation.campus = 'C2' ;
+select s.localisation.salle , count(*) "nbr serveur"  from serveur s where /**qustion 6 **/
+s.localisation.batiment = 'B2' group by s.localisation.salle order by 1 ;
+/**question 1 objetsv ligne **/
+create or replace type T_Administrateur as object 
+(NumAdm number(2),nom varchar(20), Numposte number(4)) ;
+Create Table Administrateur of T_Administrateur 
+(constraint Admin_pk primary key(numAdm)) ;
+INSERT INTO administrateur VALUES (0,'ALAOUI',3131) ;
+INSERT INTO administrateur VALUES (1,'Karim',3131) ;
+select value(a) from administrateur a ;
+set SERVEROUTPUT  on 
+declare 
+adm T_Administrateur  ;
+Begin 
+adm := new T_Administrateur (2,'YASSIR',2222) ;
+DBMS_OUTPUT.PUT_LINE (adm.numadm) ;
+DBMS_OUTPUT.PUT_LINE (adm.nom) ;
+DBMS_OUTPUT.PUT_LINE (adm.numposte) ;
+end;
+/
+execute affichage() ;

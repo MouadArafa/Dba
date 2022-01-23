@@ -1,0 +1,37 @@
+atelier 6
+
+select * FROM DATABASE_PROPERTIES ;
+desc dba_data_files
+select TABLESPACE_NAME ,STATUS ,AUTOEXTENSIBLE from dba_data_files ;
+desc v$parameter
+select value from v$parameter where upper(name) = 'DB_CREATE_FILE_DEST';
+ CREATE TABLESPACE DATA01 datafile 'C:\app\ISGA\oradata\orcl\data01.dbf'size 10M
+ EXTENT MANAGEMENT LOCAL ;
+ create tablespace DATA02 datafile 'C:\app\ISGA\oradata\orcl\data02.dbf' size 10M
+ EXTENT MANAGEMENT LOCAL uniform size 500M ;
+  create tablespace INDX01 datafile 'C:\app\ISGA\oradata\orcl\INDX01.dbf' size 1M
+ AUTOEXTEND ON NEXT 1M Maxsize 5M   EXTENT MANAGEMENT LOCAL uniform size 100k  ;
+ create tablespace RONLY datafile 'C:\app\ISGA\oradata\orcl\RONLY.dbf' size 5M ;
+ desc dba_data_files
+ desc v$datafile; 
+select name ,ENABLED from v$datafile ;
+desc dba_tablespaces ;
+select TABLESPACE_NAME ,status from dba_tablespaces ;
+Alter DATABASE DATAFILE  'C:\app\ISGA\oradata\orcl\data02.dbf' RESIZE 13M ;
+Alter tablespace  INDX01 offline ;
+ Alter TABLESPACE INDX01 RENAME datafile 'C:\app\ISGA\oradata\orcl\INDX01.dbf' to 
+ 'C:\app\ISGA\oradata\orcl\U06\INDX01.dbf'; 
+ Alter tablespace indx01 online ;
+ select  name , ENABLED from v$datafile ;
+
+ question 4 
+ create table table_test (nom varchar(15),prenom varchar2(30)) tablespace RONLY ; /* a */
+ ALTER tablespace RONLY read only ;
+ select TABLESPACE_NAME, status from dba_tablespaces;
+ create table table_test2 (nom varchar(10),prenom varchar2(10)) tablespace RONLY ;
+drop table table_test ;
+DROP TABLESPACE ronly including contents and DATAFILES ;
+select name , ENABLED from v$datafile ;
+select value from v$parameter where upper(name) = 'DB_CREATE_FILE_DEST';
+alter system set DB_CREATE_FILE_DEST = 'C:\app\ISGA\oradata\orcl\U05' SCOPE = MEMORY ;
+create  TABLESPACE  DATA03 DATAFILE SIZE 10MO ;
